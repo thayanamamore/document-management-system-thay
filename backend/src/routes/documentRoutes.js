@@ -4,6 +4,7 @@ const multer = require('multer');
 const documentRepository = require('../repositories/documentRepository');
 const createDocumentService = require('../services/documentService');
 const createDocumentController = require('../controllers/documentController');
+const createRateLimiter = require('./rateLimiter');
 
 const storage = multer.diskStorage({
   destination: path.resolve(__dirname, '../../storage'),
@@ -17,9 +18,10 @@ const upload = multer({ storage });
 const documentService = createDocumentService(documentRepository);
 const documentController = createDocumentController(documentService);
 const router = express.Router();
+const downloadRateLimiter = createRateLimiter();
 
 router.post('/upload', upload.single('file'), documentController.upload);
 router.get('/documents', documentController.list);
-router.get('/documents/:id/download', documentController.download);
+router.get('/documents/:id/download', downloadRateLimiter, documentController.download);
 
 module.exports = router;
