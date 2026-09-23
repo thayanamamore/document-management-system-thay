@@ -1,10 +1,10 @@
 const path = require('node:path');
 const express = require('express');
 const multer = require('multer');
+const rateLimit = require('express-rate-limit');
 const documentRepository = require('../repositories/documentRepository');
 const createDocumentService = require('../services/documentService');
 const createDocumentController = require('../controllers/documentController');
-const createRateLimiter = require('./rateLimiter');
 
 const storage = multer.diskStorage({
   destination: path.resolve(__dirname, '../../storage'),
@@ -18,7 +18,15 @@ const upload = multer({ storage });
 const documentService = createDocumentService(documentRepository);
 const documentController = createDocumentController(documentService);
 const router = express.Router();
-const downloadRateLimiter = createRateLimiter();
+const downloadRateLimiter = rateLimit({
+  windowMs: 60_000,
+  limit: 60,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: {
+    error: 'Muitas tentativas de download. Tente novamente em instantes.',
+  },
+});
 
 router.post('/upload', upload.single('file'), documentController.upload);
 router.get('/documents', documentController.list);
