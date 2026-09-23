@@ -6,7 +6,8 @@ function toPublicDocument(document) {
 }
 
 function getDownloadName(originalName) {
-  return path.basename(originalName).replace(/[\r\n]/g, '_');
+  const sanitizedName = path.basename(originalName).replace(/[\r\n]/g, '_');
+  return sanitizedName || 'documento';
 }
 
 module.exports = {
