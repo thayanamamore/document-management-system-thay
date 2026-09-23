@@ -1,0 +1,61 @@
+:root {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #18211f;
+  background: #e8eee9;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: radial-gradient(circle at 80% 0%, #f9f5e9 0, #e8eee9 42%, #dce6e1 100%);
+}
+
+button, input { font: inherit; }
+
+button { cursor: pointer; }
+button:disabled { cursor: wait; opacity: 0.6; }
+
+.app-shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 64px 0 80px; }
+.app-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 44px; }
+.eyebrow { margin: 0 0 10px; color: #a14f35; font: 700 0.74rem/1.2 Arial, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; }
+h1, h2, p { margin-top: 0; }
+h1 { max-width: 600px; margin-bottom: 14px; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 0.98; letter-spacing: -0.04em; }
+h2 { margin-bottom: 0; font-size: 1.6rem; font-weight: 400; }
+.intro { margin-bottom: 0; color: #5f6b66; font: 1rem/1.5 Arial, sans-serif; }
+.status-chip { display: flex; align-items: center; gap: 9px; padding: 10px 14px; border: 1px solid #c7d3cc; border-radius: 999px; color: #51635b; font: 0.78rem Arial, sans-serif; white-space: nowrap; }
+.status-chip span { width: 8px; height: 8px; border-radius: 50%; background: #4e8b64; }
+.app-grid { display: grid; grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.6fr); gap: 22px; align-items: start; }
+.upload-panel, .documents-panel { border-top: 3px solid #263f38; background: rgba(255, 253, 246, 0.74); padding: 28px; }
+.section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.upload-mark, .document-count { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #e2a36e; color: #24342f; font: 1.5rem Arial, sans-serif; }
+.document-count { background: #dce6e1; font-size: 0.9rem; }
+label { display: block; margin: 20px 0 8px; color: #52615b; font: 700 0.76rem Arial, sans-serif; text-transform: uppercase; }
+input[type='text'], input:not([type]) { width: 100%; border: 1px solid #b8c8bf; background: #fdfcf6; padding: 12px; color: #18211f; }
+input[type='file'] { width: 100%; border: 1px dashed #9eb2a7; padding: 12px; color: #52615b; font: 0.85rem Arial, sans-serif; }
+input:focus { outline: 2px solid #e2a36e; outline-offset: 2px; }
+.file-name { margin: 10px 0 0; overflow: hidden; color: #5f6b66; font: 0.85rem Arial, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.primary-button, .secondary-button { border: 0; padding: 12px 17px; font: 700 0.8rem Arial, sans-serif; }
+.primary-button { width: 100%; margin-top: 28px; background: #263f38; color: #fffdf6; }
+.secondary-button { background: #e9c09c; color: #24342f; }
+.document-table { border-top: 1px solid #cad6ce; }
+.document-row { display: grid; grid-template-columns: 42px minmax(0, 1fr) minmax(80px, 0.45fr) auto; gap: 16px; align-items: center; padding: 17px 0; border-bottom: 1px solid #d8e0da; }
+.document-icon { display: grid; place-items: center; width: 38px; height: 38px; background: #263f38; color: #fffdf6; font: 0.56rem Arial, sans-serif; }
+.document-details { display: grid; gap: 5px; min-width: 0; }
+.document-details strong { overflow: hidden; font-size: 1rem; font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+.document-details span, .document-owner { overflow: hidden; color: #718078; font: 0.76rem Arial, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.empty-state { padding: 28px 0 8px; color: #718078; font: 0.9rem/1.5 Arial, sans-serif; }
+.error-message { color: #a14f35; font: 0.82rem/1.4 Arial, sans-serif; }
+.inline-error { display: block; max-width: 120px; margin-top: 5px; color: #a14f35; font: 0.68rem Arial, sans-serif; }
+.download-action { text-align: right; }
+
+@media (max-width: 760px) {
+  .app-shell { width: min(100% - 28px, 560px); padding-top: 36px; }
+  .app-header { display: block; margin-bottom: 30px; }
+  .status-chip { display: inline-flex; margin-top: 22px; }
+  .app-grid { grid-template-columns: 1fr; }
+  .document-row { grid-template-columns: 38px minmax(0, 1fr) auto; gap: 11px; }
+  .document-owner { display: none; }
+}
